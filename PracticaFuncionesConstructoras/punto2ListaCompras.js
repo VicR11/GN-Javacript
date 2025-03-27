@@ -15,9 +15,9 @@ function ListaCompras(){
         this.productos.push(producto)
     }
 
-    this.mostrar = function(producto){
+    this.mostrar = function(){
         for (i=0; i<this.productos.length; i++){
-            console.log(i+". "+this.productos[i])
+            console.log((i+1)+". "+this.productos[i])
         }
     }
 
@@ -25,7 +25,7 @@ function ListaCompras(){
 lista1 = new ListaCompras()
 lista1.agregar("Manzanas")
 lista1.agregar("Pera")
-lista1.agregar("Bnano")
+lista1.agregar("Banano")
 lista1.mostrar()
 
 
