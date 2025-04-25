@@ -30,8 +30,7 @@ body {
     font-size: 1rem;
   }
 
-  button  {
-    background-color: #007bff;
+  button{
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -41,7 +40,13 @@ body {
     transition: background-color 0.2s ease-in-out;
   }
 
-  button:hover {
+  button#agregar{
+    background-color: #007bff;
+  }
+
+
+
+  button#agregar :hover {
     background-color: #0056b3;
   }
 
@@ -71,10 +76,15 @@ body {
    color: green;
   }
 
+
   .EliminarTarea {
     background-color: #dc3545;
   }
 
   .EliminarTarea:hover {
     background-color: #a71d2a;
+  }
+
+  #eliminarLista {
+    background-color: #dc3545;
   }
