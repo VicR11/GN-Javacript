@@ -3,13 +3,21 @@ let lista = document.querySelector("ul")
 let botonAgregar = document.getElementById("agregar")
 let eliminarTodo = document.getElementById("eliminarLista")
 let listaTareas = JSON.parse(localStorage.getItem("KeyLista")) || [] 
+let contador =0;
 
-if(listaTareas.length>0)
+
 mostrarLista(); //para que no se muestre solo despues de dar click
+
+let tareaObj ={}
 
 botonAgregar.addEventListener("click", function(event) {
     event.preventDefault(); 
-    listaTareas.push(tarea.value)
+    tareaObj ={
+        id:contador++,
+        tarea:tarea.value,
+        checked : false
+    };
+    listaTareas.push(tareaObj)
     localStorage.setItem("KeyLista",JSON.stringify(listaTareas))
     tarea.value ="";
     mostrarLista()
@@ -20,16 +28,19 @@ botonAgregar.addEventListener("click", function(event) {
 function mostrarLista(){
 const listaLocal = JSON.parse(localStorage.getItem("KeyLista"))
 
-lista.innerHTML = ""
-listaLocal.forEach(element => {
-    lista.innerHTML += `<li>
-    <label>
-    <input type="checkbox">
-        <span>${element}</span>
-    </label>
-    <button class="EliminarTarea">Eliminar</button>
-</li>` 
-})
+
+    lista.innerHTML = ""
+    listaLocal.forEach((element, index) => {
+
+        lista.innerHTML += `<li data-id="${element.id}">
+        <label>
+        <input type="checkbox" ${element.checked ? "checked" : ""}>
+            <span>${element.tarea}</span>
+        </label>
+        <button class="EliminarTarea">Eliminar</button>
+    </li>` 
+    })
+    
 }
 
 
@@ -37,20 +48,21 @@ listaLocal.forEach(element => {
 
 lista.addEventListener("click", function(event) {
   if (event.target.classList.contains("EliminarTarea")) {
-        listaTareas = listaTareas.filter(tarea => tarea !== event.target.previousElementSibling.textContent.trim());
+        listaTareas = listaTareas.filter(item => item.id !== Number(event.target.parentElement.dataset.id));
         localStorage.setItem("KeyLista", JSON.stringify(listaTareas));
-        mostrarLista()
+        mostrarLista()   
    }
-   
 });
 
 
 eliminarTodo.addEventListener("click", function(event) {
      localStorage.removeItem("KeyLista");
      mostrarLista()
+     contador = 0;
   });
 
 
+ 
 
 
 /*lista.addEventListener("click", function(event) {
